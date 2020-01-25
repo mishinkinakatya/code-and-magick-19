@@ -23,21 +23,26 @@ var renderCloud = function (ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var pileHeight = function (playersTimes, player) {
-  var maxTime = Math.max.apply(null, playersTimes);
+var findPileHeight = function (playersTimes, player) {
+  var maxTime = playersTimes[0];
+  for (var i = 1; i <= playersTimes.length - 1; i++) {
+    if (playersTimes[i] > maxTime) {
+      maxTime = playersTimes[i];
+    }
+  }
   return (player * COLUMN_MAX_HEIGHT) / maxTime;
 };
 
 var renderPile = function (ctx, playersTimes, playersNames) {
   for (var i = 0; i <= playersTimes.length - 1; i++) {
     ctx.fillStyle = mainColor;
-    ctx.fillText(Math.round(playersTimes[i]), pileX + i * shift, pileY - pileHeight(playersTimes, playersTimes[i]) - GAP);
+    ctx.fillText(Math.round(playersTimes[i]), pileX + i * shift, pileY - findPileHeight(playersTimes, playersTimes[i]) - GAP);
     if (playersNames[i] === 'Вы') {
       ctx.fillStyle = COLOR_PILE_YOU;
     } else {
       ctx.fillStyle = 'hsl(240, ' + Math.floor(Math.random() * 100) + '%, 50%)';
     }
-    ctx.fillRect(pileX + i * shift, pileY - pileHeight(playersTimes, playersTimes[i]), COLUMN_WIDTH, pileHeight(playersTimes, playersTimes[i]));
+    ctx.fillRect(pileX + i * shift, pileY - findPileHeight(playersTimes, playersTimes[i]), COLUMN_WIDTH, findPileHeight(playersTimes, playersTimes[i]));
     ctx.fillStyle = mainColor;
     ctx.fillText(playersNames[i], pileX + i * shift, pileY + BAR_HEIGHT);
   }
