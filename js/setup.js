@@ -27,13 +27,17 @@ var generateRandomNumbers = function (arrayLength) {
 
 // заполнение массива из персонажей
 var wizards = [];
-for (var i = 0; i < WIZARDS_COUNT; i++) {
-  wizards[i] = {
-    name: names[generateRandomNumbers(names.length)] + ' ' + surnames[generateRandomNumbers(names.length)],
-    coatColor: coats[generateRandomNumbers(coats.length)],
-    eyesColor: eyes[generateRandomNumbers(eyes.length)]
-  };
-}
+var generateWizards = function (count) {
+  for (var i = 0; i < count; i++) {
+    wizards.push({
+      name: names[generateRandomNumbers(names.length)] + ' ' + surnames[generateRandomNumbers(names.length)],
+      coatColor: coats[generateRandomNumbers(coats.length)],
+      eyesColor: eyes[generateRandomNumbers(eyes.length)]
+    });
+  }
+};
+
+generateWizards(WIZARDS_COUNT);
 
 // функция создания DOM-элемента на основе JS-объекта
 var renderNewWizard = function (wizard) {
