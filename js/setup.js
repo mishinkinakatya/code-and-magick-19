@@ -9,6 +9,8 @@ var coats = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'r
 var eyes = ['black', 'red', 'blue', 'yellow', 'green'];
 var fireballs = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
+// окно настроек
+var userDialog = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = userDialog.querySelector('.setup-close');
 var userName = userDialog.querySelector('.setup-user-name');
@@ -18,9 +20,6 @@ var wizardEyes = document.querySelector('.wizard-eyes');
 var wizardEyesColor = document.querySelector('input[name = "eyes-color"]');
 var fireball = document.querySelector('.setup-fireball-wrap');
 var fireballColor = document.querySelector('input[name = "fireball-color"]');
-
-// окно настроек
-var userDialog = document.querySelector('.setup');
 
 // блок с персонажами
 var similarListElement = userDialog.querySelector('.setup-similar-list');
