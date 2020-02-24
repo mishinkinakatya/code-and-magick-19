@@ -2,13 +2,6 @@
 (function () {
   var ESC_KEY = 'Escape';
 
-  // обработчик события - нажатие на Esc
-  var popupEscPressHandler = function (evt) {
-    if ((evt.key === ESC_KEY) && (document.activeElement !== window.util.setupWindow.userName)) {
-      closePopup();
-    }
-  };
-
   // функция открытия окна настроек
   var openPopup = function () {
     window.util.setupWindow.setup.classList.remove('hidden');
@@ -19,6 +12,13 @@
   var closePopup = function () {
     window.util.setupWindow.setup.classList.add('hidden');
     document.removeEventListener('keydown', popupEscPressHandler);
+  };
+
+  // обработчик события - нажатие на Esc
+  var popupEscPressHandler = function (evt) {
+    if ((evt.key === ESC_KEY) && (document.activeElement !== window.util.setupWindow.userName)) {
+      closePopup();
+    }
   };
 
   // обработчик на клике по аватарке

@@ -48,30 +48,8 @@
   // добавление содержимого fragment в блок с персонажами
   similarListElement.appendChild(fragment);
 
-  // обработчик события: изменение цвета плаща
-  var wizardCoatHandler = function () {
-    var color = window.util.wizardsDescription.coats[window.util.generateRandomNumbers(window.util.wizardsDescription.coats.length)];
-    window.util.setupWindow.wizardCoat.style.fill = color;
-    window.util.setupWindow.wizardCoatColor.value = color;
-  };
-
-  // обработчик события: изменение цвета глаз
-  var wizardEyesHandler = function () {
-    var color = window.util.wizardsDescription.eyes[window.util.generateRandomNumbers(window.util.wizardsDescription.eyes.length)];
-    window.util.setupWindow.wizardEyes.style.fill = color;
-    window.util.setupWindow.wizardEyesColor.value = color;
-  };
-
-  // обработчик события: изменение цвета фаербола
-  var fireballHandler = function () {
-    var color = window.util.wizardsDescription.fireballs[window.util.generateRandomNumbers(window.util.wizardsDescription.fireballs.length)];
-    window.util.setupWindow.fireball.style.background = color;
-    window.util.setupWindow.fireballColor.value = color;
-  };
-
-  window.util.setupWindow.wizardCoat.addEventListener('click', wizardCoatHandler);
-
-  window.util.setupWindow.wizardEyes.addEventListener('click', wizardEyesHandler);
-
-  window.util.setupWindow.fireball.addEventListener('click', fireballHandler);
+  // изменение цвета глаз, плаща и фаербола
+  window.util.colorize(window.util.wizardsDescription.coats, window.util.setupWindow.wizardCoat, window.util.setupWindow.wizardCoatColor);
+  window.util.colorize(window.util.wizardsDescription.eyes, window.util.setupWindow.wizardEyes, window.util.setupWindow.wizardEyesColor);
+  window.util.colorize(window.util.wizardsDescription.fireballs, window.util.setupWindow.fireball, window.util.setupWindow.fireballColor);
 })();

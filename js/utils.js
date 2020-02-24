@@ -14,6 +14,7 @@
       setup: document.querySelector('.setup'),
       setupOpen: document.querySelector('.setup-open'),
       setupClose: document.querySelector('.setup-close'),
+      setupSubmit: document.querySelector('.setup-submit'),
       userName: document.querySelector('.setup-user-name'),
       wizardCoat: document.querySelector('.wizard-coat'),
       wizardCoatColor: document.querySelector('input[name = "coat-color"]'),
@@ -21,10 +22,23 @@
       wizardEyesColor: document.querySelector('input[name = "eyes-color"]'),
       fireball: document.querySelector('.setup-fireball-wrap'),
       fireballColor: document.querySelector('input[name = "fireball-color"]'),
+      dialog: document.querySelector('.upload'),
     },
 
     generateRandomNumbers: function (arrayLength) {
       return Math.floor(Math.random() * Math.floor(arrayLength - 1));
+    },
+
+    colorize: function (description, element, elementInput) {
+      element.addEventListener('click', function () {
+        var color = description[window.util.generateRandomNumbers(description.length)];
+        if (element.tagName.toLowerCase() === 'div') {
+          element.style.background = color;
+        } else {
+          element.style.fill = color;
+        }
+        elementInput.value = color;
+      });
     },
   };
 

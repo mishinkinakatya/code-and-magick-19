@@ -2,9 +2,8 @@
 
 // при повторном открытии/закрытии диалога, положение диалога должно сбрасываться на изначальное.
 (function () {
-  var dialog = window.util.setupWindow.setup.querySelector('.upload');
 
-  dialog.addEventListener('mousedown', function (evt) {
+  window.util.setupWindow.dialog.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
     var startCoords = {
       x: evt.clientX,
@@ -38,15 +37,23 @@
       document.removeEventListener('mouseup', mouseUpHandler);
 
       if (dragged) {
-        var ClickPreventDefaultHandler = function (clickEvt) {
+        var сlickPreventDefaultHandler = function (clickEvt) {
           clickEvt.preventDefault();
-          dialog.removeEventListener('click', ClickPreventDefaultHandler);
+          window.util.setupWindow.dialog.removeEventListener('click', сlickPreventDefaultHandler);
         };
-        dialog.addEventListener('click', ClickPreventDefaultHandler);
+        window.util.setupWindow.dialog.addEventListener('click', сlickPreventDefaultHandler);
       }
     };
 
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
+
+    var closeDialogHandler = function () {
+      window.util.setupWindow.setup.style.top = null;
+      window.util.setupWindow.setup.style.left = null;
+    };
+
+    window.util.setupWindow.setupClose.addEventListener('click', closeDialogHandler);
+    window.util.setupWindow.setupSubmit.addEventListener('click', closeDialogHandler);
   });
 })();
