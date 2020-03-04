@@ -1,6 +1,10 @@
 'use strict';
 (function () {
   var ESC_KEY = 'Escape';
+  var WIZARDS_COUNT = 4;
+  var similarListElement = window.util.setupWindow.setup.querySelector('.setup-similar-list');
+  var form = window.util.setupWindow.setup.querySelector('.setup-wizard-form');
+  var submitButton = form.querySelector('.setup-submit');
 
   // функция открытия окна настроек
   var openPopup = function () {
@@ -50,4 +54,43 @@
       closePopup();
     }
   });
+
+  // функция, которая срабатывает при успешной отправке формы
+  var sendHandler = function () {
+    closePopup();
+    submitButton.textContent = 'Сохранить';
+  };
+
+  // функция, которая срабатывает при загрузке данных с сервера
+  var loadHandler = function (wizards) {
+    var fragment = document.createDocumentFragment();
+
+    for (var j = 0; j < WIZARDS_COUNT; j++) {
+      fragment.appendChild(window.wizard.renderNewWizard(wizards[j]));
+    }
+
+    similarListElement.appendChild(fragment);
+  };
+
+  // функция, которая срабатывает при возникновении ошибок
+  var errorHandler = function (message) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+    node.textContent = message;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  // обработчик событий на кнопку Отправить
+  form.addEventListener('submit', function (evt) {
+    submitButton.textContent = 'Данные отправляются...';
+    window.backend.save(new FormData(form), sendHandler, errorHandler);
+    evt.preventDefault();
+  });
+
+  window.backend.load(loadHandler, errorHandler);
+
 })();
