@@ -36,15 +36,15 @@
     }));
   };
 
-  window.wizard.coatChangeHandler = function (color) {
+  window.wizard.coatChangeHandler = window.debouce(function (color) {
     coatColor = color;
     updateWizards();
-  };
+  });
 
-  window.wizard.eyesChangeHandler = function (color) {
+  window.wizard.eyesChangeHandler = window.debouce(function (color) {
     eyesColor = color;
     updateWizards();
-  };
+  });
 
   // функция, которая срабатывает при загрузке данных с сервера
   var loadHandler = function (data) {
@@ -52,8 +52,6 @@
     window.render(wizards);
     updateWizards();
   };
-
-
 
   window.backend.load(loadHandler, window.util.errorHandler);
 
